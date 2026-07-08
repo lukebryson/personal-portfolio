@@ -31,7 +31,4 @@ export function initReveal(): void {
     if (delay) el.style.setProperty('--reveal-delay', `${delay}ms`);
     io.observe(el);
   }
-
-  // Safety net: never leave content hidden if observation misfires.
-  setTimeout(showAll, 2500);
 }
