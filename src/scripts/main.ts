@@ -2,6 +2,7 @@ import { initReveal } from './reveal';
 import { initNavScroll } from './navScroll';
 import { initParticles } from './particles';
 import { initParallax, initSpotlight } from './parallax';
+import { initMagnetic } from './magnetic';
 
 /**
  * Capability gates shared by every effect module.
@@ -18,4 +19,7 @@ const canvas = document.querySelector<HTMLCanvasElement>('[data-particles]');
 if (canvas) initParticles(canvas, reducedMotion);
 
 if (!reducedMotion.matches) initParallax();
-if (!reducedMotion.matches && finePointer.matches) initSpotlight();
+if (!reducedMotion.matches && finePointer.matches) {
+  initSpotlight();
+  initMagnetic(reducedMotion);
+}

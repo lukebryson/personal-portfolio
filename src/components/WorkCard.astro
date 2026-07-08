@@ -1,0 +1,113 @@
+---
+interface Props {
+  index: number;
+  title: string;
+  description: string;
+  tags: string[];
+  href: string;
+  delay: number;
+}
+
+const { index, title, description, tags, href, delay } = Astro.props;
+const number = String(index).padStart(2, '0');
+---
+
+<article class="card" data-magnetic data-reveal data-delay={delay}>
+  <div class="card-glow" data-cardglow aria-hidden="true"></div>
+  <div class="card-top">
+    <span class="card-index">{number}</span>
+    <a class="card-arrow" data-arrow href={href} aria-label={title}>↗</a>
+  </div>
+  <h3 class="card-title">{title}</h3>
+  <p class="card-desc">{description}</p>
+  <div class="card-tags">
+    {tags.map((tag) => <span class="tag">{tag}</span>)}
+  </div>
+</article>
+
+<style>
+  .card {
+    position: relative;
+    overflow: hidden;
+    padding: 34px;
+    min-height: 230px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #141418, #0f0f12);
+    border: 1px solid var(--border-faint);
+    transform-style: preserve-3d;
+    transition:
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+
+  .card.is-active {
+    border-color: rgba(196, 20, 20, 0.45);
+    box-shadow: 0 24px 60px -20px rgba(196, 20, 20, 0.35);
+  }
+
+  .card-glow {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .card-index {
+    font: 500 12px/1 var(--font-mono);
+    letter-spacing: 0.08em;
+    color: var(--accent-bright);
+  }
+
+  .card-arrow {
+    font-size: 18px;
+    line-height: 1;
+    color: var(--text-faint);
+    transition:
+      transform 0.35s ease,
+      color 0.35s ease;
+  }
+
+  .card.is-active .card-arrow {
+    transform: translate(3px, -3px);
+    color: var(--accent-bright);
+  }
+
+  .card-title {
+    margin: 20px 0 12px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(20px, 1.9vw, 25px);
+    line-height: 1.22;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+  }
+
+  .card-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 22px;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    font: 500 11px/1 var(--font-mono);
+    letter-spacing: 0.02em;
+    color: #a7a7b0;
+    border: 1px solid var(--border-mid);
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+</style>

@@ -1,0 +1,98 @@
+---
+import WorkCard from './WorkCard.astro';
+
+const projects = [
+  {
+    title: 'SPFx Incident-Management Web Part',
+    description:
+      'React Flow swim-lane diagrams that turn tangled incident timelines into something a team can read at a glance.',
+    tags: ['SPFx', 'React', 'React Flow', 'TypeScript'],
+  },
+  {
+    title: 'Power Automate → Dataverse ALM',
+    description:
+      'Rebuilt a sprawl of cloud flows as a managed Dataverse solution with real ALM — repeatable, promotable, no more copy-paste deployments.',
+    tags: ['Power Automate', 'Dataverse', 'Solutions & ALM', 'Managed Env'],
+  },
+  {
+    title: 'Personal Budgeting App',
+    description:
+      "Open Banking data, a Telegram bot front-end and the Claude API — a budgeting companion that nudges me so I don't chase a spreadsheet.",
+    tags: ['Open Banking', 'Telegram', 'Claude API', 'Node'],
+  },
+  {
+    title: 'power-platform-architect',
+    description:
+      "An AI tooling skill that scaffolds Power Platform architecture calls — turning 'where should this logic live?' into a guided answer.",
+    tags: ['AI Tooling', 'Copilot Studio', 'Prompt Design'],
+  },
+];
+---
+
+<section class="work" id="work">
+  <div class="inner">
+    <div class="work-head" data-reveal>
+      <div>
+        <p class="eyebrow">Selected Work</p>
+        <h2 class="section-title">Things I've shipped lately</h2>
+      </div>
+      <span class="work-counter" aria-hidden="true">(04)</span>
+    </div>
+
+    <div class="work-grid">
+      {projects.map((project, i) => (
+        <WorkCard
+          index={i + 1}
+          title={project.title}
+          description={project.description}
+          tags={project.tags}
+          href="#"
+          delay={i * 90}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .work {
+    padding: 110px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--bg-alt);
+  }
+
+  .work-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+  }
+
+  .work-head .eyebrow {
+    margin-bottom: 20px;
+  }
+
+  .work-counter {
+    font: 500 13px/1 var(--font-mono);
+    color: var(--text-ghost);
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    perspective: 1200px;
+  }
+
+  @media (max-width: 768px) {
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .work {
+      padding: 78px 22px;
+    }
+  }
+</style>
