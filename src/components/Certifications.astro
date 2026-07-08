@@ -1,0 +1,161 @@
+---
+const certs = [
+  { code: 'PL-200', name: 'Power Platform Functional Consultant', passed: true },
+  { code: 'AI-901', name: 'Microsoft Azure AI', passed: true },
+  { code: 'AB-620', name: 'Microsoft Certified', passed: true },
+  { code: 'PL-400', name: 'Power Platform Developer', passed: false, progress: 62 },
+];
+---
+
+<section class="certs" id="certs">
+  <div class="inner">
+    <div class="certs-head" data-reveal>
+      <div>
+        <p class="eyebrow">Certifications</p>
+        <h2 class="section-title">Microsoft certified</h2>
+      </div>
+      <p class="certs-sub">
+        Three passed, one in progress — with PL-400 the next on the list.
+      </p>
+    </div>
+
+    <div class="certs-grid">
+      {certs.map((cert, i) => (
+        <div class:list={['cert', { 'in-progress': !cert.passed }]} data-reveal data-delay={i * 90}>
+          <div class="cert-top">
+            <span class="cert-code">{cert.code}</span>
+            <span class="cert-status">
+              <span class="cert-dot" aria-hidden="true"></span>
+              {cert.passed ? 'Passed' : 'In progress'}
+            </span>
+          </div>
+          <p class="cert-name">{cert.name}</p>
+          {!cert.passed && (
+            <div
+              class="cert-track"
+              role="progressbar"
+              aria-label={`${cert.code} study progress`}
+              aria-valuenow={cert.progress}
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              <div class="cert-fill" style={`width:${cert.progress}%`}></div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .certs {
+    padding: 110px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--bg-alt);
+  }
+
+  .certs-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .certs-head .eyebrow {
+    margin-bottom: 20px;
+  }
+
+  .certs-sub {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-faint);
+    max-width: 280px;
+  }
+
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+  }
+
+  .cert {
+    background: linear-gradient(180deg, #131316, #0e0e11);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 24px;
+  }
+
+  .cert-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .cert-code {
+    font: 700 24px/1 var(--font-display);
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+  }
+
+  .cert-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font: 500 11px/1 var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .cert-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--status-good);
+  }
+
+  .cert-name {
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--text-faint);
+  }
+
+  /* In-progress variant (PL-400) */
+  .cert.in-progress {
+    background: linear-gradient(180deg, #1a1214, #100c0d);
+    border-color: rgba(196, 20, 20, 0.35);
+  }
+
+  .cert.in-progress .cert-status {
+    color: var(--accent-bright);
+  }
+
+  .cert.in-progress .cert-dot {
+    background: var(--accent-bright);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .cert-track {
+    margin-top: 16px;
+    height: 4px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+
+  .cert-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .certs {
+      padding: 78px 22px;
+    }
+  }
+</style>

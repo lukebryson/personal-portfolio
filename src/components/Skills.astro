@@ -1,0 +1,134 @@
+---
+const groups = [
+  {
+    name: 'SharePoint',
+    chip: '#e0332f',
+    skills: ['SPFx', 'PnP', 'Site Architecture', 'Lists & Libraries', 'Permissions', 'Search'],
+  },
+  {
+    name: 'Power Platform',
+    chip: '#c9c9cf',
+    skills: ['Power Automate', 'Power Apps', 'Dataverse', 'Solutions & ALM', 'Power Fx', 'Managed Env'],
+  },
+  {
+    name: 'Azure / AI',
+    chip: '#e0332f',
+    skills: ['Copilot Studio', 'Azure AI Foundry', 'Azure Functions', 'AI Agents', 'Prompting'],
+  },
+  {
+    name: 'Dev Tooling',
+    chip: '#c9c9cf',
+    skills: ['TypeScript', 'React', 'Node', 'Git', 'PowerShell', 'CI/CD'],
+  },
+];
+---
+
+<section class="skills" id="skills">
+  <div class="inner">
+    <div class="skills-head" data-reveal>
+      <p class="eyebrow">Capabilities</p>
+      <h2 class="section-title">The stack I reach for</h2>
+    </div>
+
+    <div class="skills-grid">
+      {groups.map((group, i) => (
+        <div class="group" data-reveal data-delay={i * 90}>
+          <div class="group-head">
+            <span class="group-chip" style={`background:${group.chip}`} aria-hidden="true"></span>
+            <span class="group-name">{group.name}</span>
+          </div>
+          <div class="group-skills">
+            {group.skills.map((skill) => <span class="skill">{skill}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    padding: 110px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--bg);
+  }
+
+  .skills-head {
+    margin-bottom: 44px;
+  }
+
+  .skills-head .eyebrow {
+    margin-bottom: 20px;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 24px;
+  }
+
+  .group {
+    background: #0d0d10;
+    border: 1px solid var(--border-faint);
+    border-radius: 16px;
+    padding: 26px;
+  }
+
+  .group-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .group-chip {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .group-name {
+    font: 600 15px/1 var(--font-display);
+    color: var(--text-primary);
+  }
+
+  .group-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill {
+    font: 500 12px/1 var(--font-mono);
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 11px;
+    border-radius: 7px;
+    transition:
+      border-color 0.25s ease,
+      color 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .skill:hover {
+    border-color: rgba(196, 20, 20, 0.45);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skill:hover {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .skills {
+      padding: 78px 22px;
+    }
+  }
+</style>
