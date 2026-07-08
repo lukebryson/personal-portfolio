@@ -1,4 +1,4 @@
-# Luke Bryson - Portfolio
+# Luke Bryson- Portfolio
 
 This is my personal portfolio. 
 
