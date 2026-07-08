@@ -3,6 +3,7 @@ import { initNavScroll } from './navScroll';
 import { initParticles } from './particles';
 import { initParallax, initSpotlight } from './parallax';
 import { initMagnetic } from './magnetic';
+import { initTilt } from './tilt';
 
 /**
  * Capability gates shared by every effect module.
@@ -22,4 +23,5 @@ if (!reducedMotion.matches) initParallax();
 if (!reducedMotion.matches && finePointer.matches) {
   initSpotlight();
   initMagnetic(reducedMotion);
+  initTilt();
 }
