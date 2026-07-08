@@ -1,0 +1,229 @@
+/* ------------------------------------------------------------------
+   Design tokens (build-brief §2)
+------------------------------------------------------------------ */
+:root {
+  --bg: #08080a;
+  --bg-alt: #0a0a0c;
+  --bg-card: #0e0e11;
+
+  --border-faint: rgba(255, 255, 255, 0.07);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-mid: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.14);
+
+  --text-primary: #ededf0;
+  --text-secondary: #b6b6bd;
+  --text-muted: #9a9aa2;
+  --text-faint: #8b8b93;
+  --text-ghost: #5c5c63; /* decorative use only — fails AA on --bg */
+
+  --accent: #c41414; /* brand family: #c41414 / #e0332f / #b81d1d / #a01212 */
+  --accent-bright: #e0332f;
+  --status-good: #9fe0b0;
+
+  --silver-grad: linear-gradient(180deg, #ffffff 0%, #d2d2d8 52%, #8f8f96 100%);
+
+  --font-display: 'Space Grotesk Variable', 'Space Grotesk', sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+/* ------------------------------------------------------------------
+   Base
+------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font: 400 16px/1.6 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+section {
+  scroll-margin-top: 88px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------------
+   Shared building blocks
+------------------------------------------------------------------ */
+.inner {
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+.eyebrow {
+  font: 500 12px/1 var(--font-mono);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-bright);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(30px, 3.4vw, 44px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+/* ------------------------------------------------------------------
+   Scroll progress bar
+------------------------------------------------------------------ */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+  z-index: 200;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------
+   Custom cursor (elements created by JS on fine-pointer devices)
+------------------------------------------------------------------ */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cursor-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  z-index: 210;
+}
+
+.cursor-ring {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(196, 20, 20, 0.5);
+  z-index: 209;
+  transition:
+    opacity 0.3s ease,
+    width 0.25s ease,
+    height 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.cursor-ring.is-hovering {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(224, 51, 47, 0.9);
+}
+
+/* ------------------------------------------------------------------
+   Scroll reveal (JS adds .revealed; hidden state only when JS runs)
+------------------------------------------------------------------ */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s ease var(--reveal-delay, 0ms),
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) var(--reveal-delay, 0ms);
+}
+
+html.js [data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------------
+   Keyframes
+------------------------------------------------------------------ */
+@keyframes scrollBob {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scaleY(0.55);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Reduced motion — opacity fades only, no movement
+------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  html.js [data-reveal] {
+    transform: none;
+    transition: opacity 0.6s ease var(--reveal-delay, 0ms);
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
