@@ -1,0 +1,231 @@
+---
+const links = [
+  { href: '#about', label: 'About' },
+  { href: '#work', label: 'Work' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#certs', label: 'Certs' },
+];
+---
+
+<header class="nav" data-nav>
+  <a class="brand" href="#top">
+    <img src="/lb-logo.svg" alt="" width="34" height="34" />
+    <span class="wordmark">Luke Bryson</span>
+  </a>
+
+  <div class="nav-right">
+    <nav class="nav-links" id="nav-menu" aria-label="Primary">
+      {links.map(({ href, label }) => (
+        <a data-navlink href={href}>{label}</a>
+      ))}
+    </nav>
+    <a class="cta" data-magnet href="#contact">Get in touch</a>
+    <button
+      class="menu-btn"
+      type="button"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+      aria-label="Open menu"
+    >
+      <span class="menu-icon" aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 150;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    border-bottom: 1px solid transparent;
+    transition:
+      background 0.4s ease,
+      border-color 0.4s ease,
+      padding 0.4s ease;
+  }
+
+  .nav.scrolled {
+    background: rgba(8, 8, 10, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom-color: var(--border-faint);
+    padding: 12px 40px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .wordmark {
+    font: 600 15px/1 var(--font-display);
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-links a {
+    font: 500 13px/1 var(--font-body);
+    color: var(--text-muted);
+    padding: 9px 14px;
+    border-radius: 100px;
+    transition:
+      color 0.25s ease,
+      background 0.25s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-links a.active {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .cta {
+    font: 500 13px/1 var(--font-body);
+    color: #fff;
+    background: var(--accent);
+    padding: 10px 18px;
+    border-radius: 100px;
+    margin-left: 6px;
+    white-space: nowrap;
+  }
+
+  /* --- Mobile menu ------------------------------------------------ */
+  .menu-btn {
+    display: none;
+    background: none;
+    border: 1px solid var(--border-mid);
+    border-radius: 100px;
+    padding: 11px 12px;
+    cursor: pointer;
+  }
+
+  .menu-icon,
+  .menu-icon::before,
+  .menu-icon::after {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .menu-icon {
+    position: relative;
+  }
+
+  .menu-icon::before,
+  .menu-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .menu-icon::before {
+    top: -5px;
+  }
+
+  .menu-icon::after {
+    top: 5px;
+  }
+
+  .nav.menu-open .menu-icon {
+    background: transparent;
+  }
+
+  .nav.menu-open .menu-icon::before {
+    transform: translateY(5px) rotate(45deg);
+  }
+
+  .nav.menu-open .menu-icon::after {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+
+  @media (max-width: 700px) {
+    .nav {
+      padding: 14px 22px;
+    }
+
+    .nav.scrolled {
+      padding: 11px 22px;
+    }
+
+    .menu-btn {
+      display: block;
+    }
+
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+      padding: 10px 22px 18px;
+      background: rgba(8, 8, 10, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-faint);
+    }
+
+    .nav.menu-open .nav-links {
+      display: flex;
+    }
+
+    .nav-links a {
+      padding: 13px 14px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+  const btn = nav?.querySelector<HTMLButtonElement>('.menu-btn');
+
+  if (nav && btn) {
+    const setOpen = (open: boolean) => {
+      nav.classList.toggle('menu-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+
+    btn.addEventListener('click', () =>
+      setOpen(!nav.classList.contains('menu-open')),
+    );
+
+    nav.querySelectorAll('.nav-links a').forEach((a) =>
+      a.addEventListener('click', () => setOpen(false)),
+    );
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('menu-open')) {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+  }
+</script>
