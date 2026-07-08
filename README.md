@@ -1,8 +1,8 @@
-# Luke Bryson — Portfolio
+# Luke Bryson - Portfolio
 
-Personal portfolio site for Luke Bryson, Cloud Technical Engineer. A single-page static site built with [Astro 5](https://astro.build) and vanilla TypeScript — no UI framework, no client-side dependencies, self-hosted fonts.
+This is my personal portfolio. 
 
-The full spec (content, design tokens, animation behaviour, responsive and accessibility requirements) lives in [`build-brief.md`](build-brief.md).
+It's a single-page static site built with [Astro 5](https://astro.build) and vanilla TypeScript- no UI framework, no client-side dependencies, self-hosted fonts.
 
 ## Getting started
 
@@ -50,7 +50,7 @@ src/
 public/                  logo, favicon, OG image
 ```
 
-All animation is gated on `prefers-reduced-motion` and pointer capability — touch devices and reduced-motion users get a calmer, fully functional site.
+All animation is gated on `prefers-reduced-motion` and pointer capability- touch devices and reduced-motion users get a calmer, fully functional site.
 
 ## Placeholders
 
@@ -59,4 +59,4 @@ All animation is gated on `prefers-reduced-motion` and pointer capability — to
 
 ## Deploying
 
-Static output — zero-config on Vercel (no adapter needed). Pushes get automatic preview URLs once the repo is connected.
+Static output- zero-config on Vercel (no adapter needed). Pushes get automatic preview URLs once the repo is connected.
