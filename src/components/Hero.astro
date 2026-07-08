@@ -1,8 +1,7 @@
 ---
 const stats = [
-  { value: '3×', label: 'Microsoft certified' },
-  { value: 'L4', label: 'SWE apprentice · EPA stage' },
-  { value: 'MSP', label: 'Microsoft cloud, daily' },
+  { value: '4×', label: 'Microsoft certified' },
+  { value: '3+ yrs', label: 'on the Power Platform' },
 ];
 ---
 
@@ -18,9 +17,7 @@ const stats = [
       Luke Bryson<span class="dot">.</span>
     </h1>
     <p class="hero-sub" data-reveal data-delay="160">
-      I build and untangle solutions across SharePoint, the Power Platform and
-      Microsoft's AI stack — at an MSP, usually with a soft spot for the messy
-      edge cases most people would rather avoid.
+      I work across SharePoint, the Power Platform and Microsoft's AI stack.
     </p>
     <div class="hero-stats" data-reveal data-delay="240">
       {stats.map(({ value, label }) => (
@@ -90,6 +87,7 @@ const stats = [
     font-size: clamp(56px, 10vw, 140px);
     line-height: 0.9;
     letter-spacing: -0.035em;
+    padding-bottom: 0.08em;
     background: var(--silver-grad);
     -webkit-background-clip: text;
     background-clip: text;

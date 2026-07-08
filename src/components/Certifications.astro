@@ -3,7 +3,7 @@ const certs = [
   { code: 'PL-200', name: 'Power Platform Functional Consultant', passed: true },
   { code: 'AI-901', name: 'Microsoft Azure AI', passed: true },
   { code: 'AB-620', name: 'Microsoft Certified', passed: true },
-  { code: 'PL-400', name: 'Power Platform Developer', passed: false, progress: 62 },
+  { code: 'PL-400', name: 'Power Platform Developer', passed: true },
 ];
 ---
 
@@ -15,35 +15,30 @@ const certs = [
         <h2 class="section-title">Microsoft certified</h2>
       </div>
       <p class="certs-sub">
-        Three passed, one in progress — with PL-400 the next on the list.
+        Four Microsoft certifications passed - PL-400 the latest.
       </p>
     </div>
 
     <div class="certs-grid">
       {certs.map((cert, i) => (
-        <div class:list={['cert', { 'in-progress': !cert.passed }]} data-reveal data-delay={i * 90}>
+        <div class="cert" data-reveal data-delay={i * 90}>
           <div class="cert-top">
             <span class="cert-code">{cert.code}</span>
             <span class="cert-status">
               <span class="cert-dot" aria-hidden="true"></span>
-              {cert.passed ? 'Passed' : 'In progress'}
+              Passed
             </span>
           </div>
           <p class="cert-name">{cert.name}</p>
-          {!cert.passed && (
-            <div
-              class="cert-track"
-              role="progressbar"
-              aria-label={`${cert.code} study progress`}
-              aria-valuenow={cert.progress}
-              aria-valuemin="0"
-              aria-valuemax="100"
-            >
-              <div class="cert-fill" style={`width:${cert.progress}%`}></div>
-            </div>
-          )}
         </div>
       ))}
+    </div>
+
+    <div class="certs-extra" data-reveal>
+      <span class="pill">
+        <span class="pill-dot" aria-hidden="true"></span>
+        Level 4 Software Engineer
+      </span>
     </div>
   </div>
 </section>
@@ -124,33 +119,29 @@ const certs = [
     color: var(--text-faint);
   }
 
-  /* In-progress variant (PL-400) */
-  .cert.in-progress {
+  .certs-extra {
+    margin-top: 28px;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 20px;
+    border-radius: 100px;
     background: linear-gradient(180deg, #1a1214, #100c0d);
-    border-color: rgba(196, 20, 20, 0.35);
+    border: 1px solid rgba(196, 20, 20, 0.35);
+    font: 600 14px/1 var(--font-display);
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
   }
 
-  .cert.in-progress .cert-status {
-    color: var(--accent-bright);
-  }
-
-  .cert.in-progress .cert-dot {
+  .pill-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
     background: var(--accent-bright);
     box-shadow: 0 0 8px var(--accent);
-  }
-
-  .cert-track {
-    margin-top: 16px;
-    height: 4px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.08);
-    overflow: hidden;
-  }
-
-  .cert-fill {
-    height: 100%;
-    border-radius: 4px;
-    background: var(--accent);
   }
 
   @media (max-width: 640px) {

@@ -15,7 +15,7 @@
   --text-secondary: #b6b6bd;
   --text-muted: #9a9aa2;
   --text-faint: #8b8b93;
-  --text-ghost: #5c5c63; /* decorative use only — fails AA on --bg */
+  --text-ghost: #5c5c63; /* decorative use only - fails AA on --bg */
 
   --accent: #c41414; /* brand family: #c41414 / #e0332f / #b81d1d / #a01212 */
   --accent-bright: #e0332f;
@@ -208,7 +208,7 @@ html.js [data-reveal].revealed {
 }
 
 /* ------------------------------------------------------------------
-   Reduced motion — opacity fades only, no movement
+   Reduced motion - opacity fades only, no movement
 ------------------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
   html {
