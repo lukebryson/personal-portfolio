@@ -1,9 +1,10 @@
 ---
 const certs = [
-  { code: 'PL-200', name: 'Power Platform Functional Consultant', passed: true },
-  { code: 'AI-901', name: 'Microsoft Azure AI', passed: true },
-  { code: 'AB-620', name: 'Microsoft Certified', passed: true },
-  { code: 'PL-400', name: 'Power Platform Developer', passed: true },
+  { code: 'AI-901', name: 'Azure AI Fundamentals', url: 'https://learn.microsoft.com/api/credentials/share/en-us/LukeBryson-4423/40CD3D0D308736BB?sharingId=1A27609688BD495', passed: true },
+  { code: 'PL-200', name: 'Power Platform Functional Consultant', url: 'https://learn.microsoft.com/api/credentials/share/en-us/LukeBryson-4423/C964EAAA8245970C?sharingId=1A27609688BD495', passed: true },
+  { code: 'AB-410', name: 'Intelligent App Builder', url: 'https://learn.microsoft.com/en-us/credentials/certifications/intelligent-applications-builder-associate/?practice-assessment-type=certification', passed: true },
+  { code: 'AB-620', name: 'Agentic AI Builder', url: 'https://learn.microsoft.com/api/credentials/share/en-us/LukeBryson-4423/C12A07B35DCA44DD?sharingId=1A27609688BD495', passed: true },
+  { code: 'PL-400', name: 'Power Platform Developer', url: 'https://learn.microsoft.com/en-us/credentials/certifications/power-platform-developer-associate/?practice-assessment-type=certification', passed: false, progress: 62 },
 ];
 ---
 
@@ -14,23 +15,39 @@ const certs = [
         <p class="eyebrow">Certifications</p>
         <h2 class="section-title">Microsoft certified</h2>
       </div>
-      <p class="certs-sub">
-        Four Microsoft certifications passed - PL-400 the latest.
-      </p>
     </div>
 
     <div class="certs-grid">
       {certs.map((cert, i) => (
-        <div class="cert" data-reveal data-delay={i * 90}>
+        <a
+          class:list={['cert', { 'in-progress': !cert.passed }]}
+          href={cert.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-reveal
+          data-delay={i * 90}
+        >
           <div class="cert-top">
             <span class="cert-code">{cert.code}</span>
             <span class="cert-status">
               <span class="cert-dot" aria-hidden="true"></span>
-              Passed
+              {cert.passed ? 'Passed' : 'In progress'}
             </span>
           </div>
           <p class="cert-name">{cert.name}</p>
-        </div>
+          {!cert.passed && (
+            <div
+              class="cert-track"
+              role="progressbar"
+              aria-label={`${cert.code} study progress`}
+              aria-valuenow={cert.progress}
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              <div class="cert-fill" style={`width:${cert.progress}%`}></div>
+            </div>
+          )}
+        </a>
       ))}
     </div>
 
@@ -77,10 +94,23 @@ const certs = [
   }
 
   .cert {
+    display: block;
     background: linear-gradient(180deg, #131316, #0e0e11);
     border: 1px solid var(--border-soft);
     border-radius: 14px;
     padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+
+  .cert:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-3px);
+  }
+
+  .cert.in-progress:hover {
+    border-color: rgba(196, 20, 20, 0.55);
   }
 
   .cert-top {
@@ -117,6 +147,35 @@ const certs = [
     font-size: 13px;
     line-height: 1.45;
     color: var(--text-faint);
+  }
+
+  /* In-progress variant (PL-400) */
+  .cert.in-progress {
+    background: linear-gradient(180deg, #1a1214, #100c0d);
+    border-color: rgba(196, 20, 20, 0.35);
+  }
+
+  .cert.in-progress .cert-status {
+    color: var(--accent-bright);
+  }
+
+  .cert.in-progress .cert-dot {
+    background: var(--accent-bright);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .cert-track {
+    margin-top: 16px;
+    height: 4px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+
+  .cert-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: var(--accent);
   }
 
   .certs-extra {
