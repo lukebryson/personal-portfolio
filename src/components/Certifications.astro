@@ -13,7 +13,7 @@ const certs = [
     <div class="certs-head" data-reveal>
       <div>
         <p class="eyebrow">Certifications</p>
-        <h2 class="section-title">Microsoft certified</h2>
+        <h2 class="section-title">Microsoft Certified</h2>
       </div>
     </div>
 
@@ -55,6 +55,7 @@ const certs = [
       <span class="pill">
         <span class="pill-dot" aria-hidden="true"></span>
         Level 4 Software Engineer
+        <span class="pill-status">In progress</span>
       </span>
     </div>
   </div>
@@ -193,6 +194,15 @@ const certs = [
     font: 600 14px/1 var(--font-display);
     letter-spacing: -0.01em;
     color: var(--text-primary);
+  }
+
+  .pill-status {
+    padding-left: 12px;
+    border-left: 1px solid rgba(196, 20, 20, 0.35);
+    font: 500 11px/1 var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
   }
 
   .pill-dot {
