@@ -35,7 +35,10 @@ const certs = [
               {cert.passed ? 'Passed' : 'In progress'}
             </span>
           </div>
-          <p class="cert-name">{cert.name}</p>
+          <p class="cert-name">
+            <span>{cert.name}</span>
+            <span class="cert-arrow" aria-hidden="true">↗</span>
+          </p>
           {!cert.passed && (
             <div
               class="cert-track"
@@ -146,9 +149,30 @@ const certs = [
   }
 
   .cert-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
     font-size: 13px;
     line-height: 1.45;
     color: var(--text-faint);
+  }
+
+  /* Resting link affordance - mirrors the WorkCard arrow. */
+  .cert-arrow {
+    flex-shrink: 0;
+    font-size: 15px;
+    line-height: 1;
+    color: var(--text-faint);
+    transition:
+      transform 0.25s ease,
+      color 0.25s ease;
+  }
+
+  .cert:hover .cert-arrow,
+  .cert:focus-visible .cert-arrow {
+    transform: translate(3px, -3px);
+    color: var(--accent-bright);
   }
 
   /* In-progress variant (PL-400) */
