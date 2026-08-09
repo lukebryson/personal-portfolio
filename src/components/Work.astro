@@ -1,6 +1,13 @@
 ---
 import WorkCard from './WorkCard.astro';
 
+/**
+ * Flip to `true` to restore the project cards and the (04) counter.
+ * The projects below are deliberately kept intact while the section shows
+ * its Coming Soon state - see revert-notes.md.
+ */
+const showProjects = false;
+
 const projects = [
   {
     title: 'SPFx Incident-Management Web Part',
@@ -33,24 +40,33 @@ const projects = [
   <div class="inner">
     <div class="work-head" data-reveal>
       <div>
-        <p class="eyebrow">Selected Work</p>
+        <p class="eyebrow">Projects</p>
         <h2 class="section-title">Things I've built recently</h2>
       </div>
-      <span class="work-counter" aria-hidden="true">(04)</span>
+      {showProjects && <span class="work-counter" aria-hidden="true">(04)</span>}
     </div>
 
-    <div class="work-grid">
-      {projects.map((project, i) => (
-        <WorkCard
-          index={i + 1}
-          title={project.title}
-          description={project.description}
-          tags={project.tags}
-          href="#"
-          delay={i * 90}
-        />
-      ))}
-    </div>
+    {showProjects ? (
+      <div class="work-grid">
+        {projects.map((project, i) => (
+          <WorkCard
+            index={i + 1}
+            title={project.title}
+            description={project.description}
+            tags={project.tags}
+            href="#"
+            delay={i * 90}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="work-soon" data-reveal>
+        <p class="work-soon-text">
+          Coming soon - write-ups of recent Power Platform, SharePoint and AI
+          work are on the way.
+        </p>
+      </div>
+    )}
   </div>
 </section>
 
@@ -82,6 +98,26 @@ const projects = [
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     perspective: 1200px;
+  }
+
+  /* Coming Soon state - reuses the WorkCard visual language. */
+  .work-soon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 230px;
+    padding: 34px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #141418, #0f0f12);
+    border: 1px solid var(--border-faint);
+  }
+
+  .work-soon-text {
+    max-width: 42ch;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text-muted);
   }
 
   @media (max-width: 768px) {
