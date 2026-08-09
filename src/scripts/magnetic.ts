@@ -1,5 +1,5 @@
 /**
- * Magnetic hover effects (§4.2–4.3).
+ * Magnetic hover effects (§4.2-4.3).
  * - [data-magnetic] cards: translate ±8px + rotateX/Y ±6° toward the cursor,
  *   cursor-tracking radial glow, accent border/shadow via .is-active.
  * - [data-magnet] buttons: soft translate toward the cursor, strength ~5px.
