@@ -28,10 +28,6 @@ const stats = [
       ))}
     </div>
   </div>
-
-  <div class="hero-cue inner" data-reveal data-delay="400">
-    <span class="cue-bar" aria-hidden="true"></span>
-  </div>
 </section>
 
 <style>
@@ -41,7 +37,9 @@ const stats = [
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 120px 40px 48px;
+    /* Bottom padding absorbs the space the scroll cue used to occupy
+       (42px bar + 44px margin), so the hero composition is unchanged. */
+    padding: 120px 40px 134px;
     overflow: hidden;
     background: radial-gradient(115% 120% at 82% -5%, #14141a 0%, #0a0a0c 55%);
   }
@@ -135,27 +133,9 @@ const stats = [
     margin-top: 9px;
   }
 
-  .hero-cue {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    margin-top: 44px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .cue-bar {
-    width: 1px;
-    height: 42px;
-    background: linear-gradient(var(--text-faint), transparent);
-    transform-origin: top;
-    animation: scrollBob 1.9s ease-in-out infinite;
-  }
-
   @media (max-width: 640px) {
     .hero {
-      padding: 100px 22px 40px;
+      padding: 100px 22px 126px;
     }
 
     .hero-stats {
