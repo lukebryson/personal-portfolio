@@ -21,12 +21,8 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 
-# vercel
-.vercel/
-
 # ai
 CLAUDE.md
 build-brief.md
-changes-07.08.md
 handoff.md
 revert-notes.md
