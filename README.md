@@ -2,7 +2,7 @@
 
 This is my personal portfolio. 
 
-It's a single-page static site built with [Astro 5](https://astro.build) and vanilla TypeScript- no UI framework, no client-side dependencies, self-hosted fonts.
+It's a single-page static site built with [Astro 7](https://astro.build) and vanilla TypeScript- no UI framework, no client-side dependencies, self-hosted fonts.
 
 ## Getting started
 
@@ -55,8 +55,15 @@ All animation is gated on `prefers-reduced-motion` and pointer capability- touch
 ## Placeholders
 
 - **Download CV** and the four **project card links** are inert `#` links until the real URLs/PDF are supplied.
-- OG image and full SEO pass are pending final content.
 
 ## Deploying
 
-Static output- zero-config on Vercel (no adapter needed). Pushes get automatic preview URLs once the repo is connected.
+Static output deployed to [Cloudflare Workers](https://workers.cloudflare.com). `wrangler.jsonc` holds the config, including the `lukebryson.dev` apex domain as a `custom_domain` route.
+
+```sh
+npm run deploy
+```
+
+Runs `astro build && wrangler deploy`. The repo is also connected to Cloudflare's Git integration, so pushes build automatically and pull requests get commit and branch preview URLs.
+
+`site` is set to `https://lukebryson.dev` in `astro.config.mjs`- `Layout.astro` derives the canonical link and the `og:`/`twitter:` tags from it, so those resolve to absolute production URLs even when viewed on a preview deployment.
