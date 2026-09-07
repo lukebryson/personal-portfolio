@@ -64,6 +64,6 @@ Static output deployed to [Cloudflare Workers](https://workers.cloudflare.com). 
 npm run deploy
 ```
 
-Runs `astro build && wrangler deploy`. The repo is also connected to Cloudflare's Git integration, so pushes build automatically and pull requests get commit and branch preview URLs.
+Runs `astro build && wrangler deploy`- the manual publish path. The repo is also connected to Cloudflare's Git integration: pull requests get commit and branch preview URLs, and **merging to `main` promotes straight to production**, with no manual deploy step.
 
 `site` is set to `https://lukebryson.dev` in `astro.config.mjs`- `Layout.astro` derives the canonical link and the `og:`/`twitter:` tags from it, so those resolve to absolute production URLs even when viewed on a preview deployment.
