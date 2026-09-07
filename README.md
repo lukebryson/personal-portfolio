@@ -54,7 +54,7 @@ All animation is gated on `prefers-reduced-motion` and pointer capability- touch
 
 ## Placeholders
 
-- **Download CV** and the four **project card links** are inert `#` links until the real URLs/PDF are supplied.
+- The four **project card links** are inert `#` links until the real URLs are supplied.
 
 ## Deploying
 
