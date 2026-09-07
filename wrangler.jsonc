@@ -4,5 +4,11 @@
   "compatibility_date": "2026-08-07",
   "assets": {
     "directory": "./dist"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "lukebryson.dev",
+      "custom_domain": true
+    }
+  ]
 }
